@@ -259,10 +259,7 @@ FFmpeg 是独立程序，其许可独立于本项目；但**若你把本项目�
 
 ---
 
-## 贡献
 
-见 [CONTRIBUTING.md](CONTRIBUTING.md)。改动流水线逻辑时请一并跑
-`python scripts/run_pipeline.py --selftest` 确认全链路可用。
 
 ## 更新记录
 
