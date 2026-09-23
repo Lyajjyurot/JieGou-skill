@@ -104,7 +104,7 @@ def main() -> int:
         stream = {"video": {}, "audio": {}, "subtitles": [], "raw_streams": []}
 
     meta: dict = {
-        "file": str(video),
+        "file": video.name,
         "file_name": video.name,
         "size_mb": round(video.stat().st_size / 1048576, 2),
         "has_ffmpeg": True,

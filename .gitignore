@@ -8,6 +8,15 @@ references/output_template.md
 # 流水线产物
 outputs/
 **/vds_out/
+**/frames/
+**/sheets/
+**/audio/
+context_pack.md
+meta.json
+shots.json
+shots_metrics.json
+audio.json
+*_导演脚本.md
 
 # Python
 __pycache__/

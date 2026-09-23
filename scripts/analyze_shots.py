@@ -426,8 +426,10 @@ def main() -> int:
     for sh in shots_doc["shots"]:
         per_frame = []
         for f in sh.get("frames", []):
-            p = f["path"]
-            d = analyze_image(p)
+            p = Path(f["path"])
+            if not p.is_absolute():
+                p = dirs["out"] / p
+            d = analyze_image(str(p))
             if d:
                 per_frame.append(d)
                 result["per_frame_cache"][f["file"]] = d

@@ -322,7 +322,7 @@ def main() -> int:
     sig, sr, n_ch = read_wav(wav_path)
     dur = sig.size / sr
     result.update({"has_audio": True, "sample_rate": sr, "duration": round(dur, 3),
-                   "wav": str(wav_path).replace("\\", "/")})
+                   "wav": f"audio/{wav_path.name}"})
 
     result["loudness"] = ffmpeg_loudness(video)
     result["silences"] = ffmpeg_silences(video)

@@ -81,7 +81,7 @@ def main() -> int:
     # ---------------------------------------------------------------- 0
     A("## 0. 素材概况")
     A("")
-    A(f"- 文件：`{meta.get('file')}`")
+    A(f"- 文件：`{meta.get('file_name') or meta.get('file')}`")
     A(f"- 时长：**{tc(meta.get('duration', 0))}**（{meta.get('duration')}s）")
     A(f"- 画面：{meta.get('width')}×{meta.get('height')} · {meta.get('fps')}fps · "
       f"档位「{meta.get('tier')}」")

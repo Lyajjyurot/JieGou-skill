@@ -474,7 +474,7 @@ def main() -> int:
             continue
         out_frames.append({
             "file": name,
-            "path": str(p).replace("\\", "/"),
+            "path": f"frames/{name}",
             "t": round(f["t"], 3),
             "shot_id": f["shot_id"],
         })
@@ -500,17 +500,18 @@ def main() -> int:
             "last": fl[-1]["file"] if fl else None,
         }
 
-    # ---- 接触表
+    # ---- 接触表（JSON 只存相对 out 的路径，避免写入本机绝对路径）
     sheets: list[dict] = []
-    ov_items = [{"path": f["path"], "t": f["t"], "shot_id": f["shot_id"]}
-                for f in out_frames]
+    ov_items = [{"path": str(dirs["frames"] / f["file"]), "t": f["t"],
+                 "shot_id": f["shot_id"]} for f in out_frames]
     per = args.overview_cols * 4
     for si in range(0, len(ov_items), per):
         chunk = ov_items[si:si + per]
-        p = dirs["sheets"] / f"overview_{si // per + 1:02d}.jpg"
+        name = f"overview_{si // per + 1:02d}.jpg"
+        p = dirs["sheets"] / name
         r = make_sheet_quiet(chunk, args.overview_cols, args.tile, p)
         if r:
-            sheets.append({"kind": "overview", "path": r,
+            sheets.append({"kind": "overview", "path": f"sheets/{name}",
                            "range": [chunk[0]["t"], chunk[-1]["t"]],
                            "n": len(chunk)})
 
@@ -521,11 +522,13 @@ def main() -> int:
         take = fl if len(fl) <= 9 else [
             fl[round(i * (len(fl) - 1) / 8)] for i in range(9)
         ]
-        items = [{"path": f["path"], "t": f["t"], "shot_id": f["shot_id"]} for f in take]
-        p = dirs["sheets"] / f"detail_s{sh['shot_id']:02d}.jpg"
+        items = [{"path": str(dirs["frames"] / f["file"]), "t": f["t"],
+                  "shot_id": f["shot_id"]} for f in take]
+        name = f"detail_s{sh['shot_id']:02d}.jpg"
+        p = dirs["sheets"] / name
         r = make_sheet_quiet(items, args.detail_cols, args.detail_tile, p)
         if r:
-            sh["detail_sheet"] = r
+            sh["detail_sheet"] = f"sheets/{name}"
 
     # ---- 全片运镜统计：便于模型横向比较各镜运动量的相对大小
     def stat(key):
@@ -538,7 +541,7 @@ def main() -> int:
                 "max_shot": shots[int(np.argmax(vals))]["shot_id"] if vals else None}
 
     payload = {
-        "video": str(video),
+        "video": video.name,
         "duration": round(duration, 3),
         "fps": round(fps, 4),
         "analyze_sr": round(sr, 2),
