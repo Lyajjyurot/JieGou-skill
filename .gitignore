@@ -1,0 +1,37 @@
+# 工具运行时目录（内含工作日志与本机环境信息，不应入库）
+.workbuddy/
+
+# 用户自备的输出模板：版权归属未定，不随仓库分发
+references/output_template.md
+模板.txt
+
+# 流水线产物
+outputs/
+**/vds_out/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.python-version
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 媒体文件（避免误提交测试素材）
+*.wav
+*.m4a
+*.mp4
+*.mov
+*.mkv
+
+# 分发产物
+dist/
+*.zip

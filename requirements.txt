@@ -1,0 +1,11 @@
+# 运行依赖 —— 安装：python -m pip install -r requirements.txt
+#
+# 若某些包在镜像源上找不到（报 No matching distribution found），换源重试，例如：
+#   python -m pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/
+
+numpy>=1.24
+opencv-python-headless>=4.8,<5
+pillow>=10.0
+# imageio-ffmpeg 自带 ffmpeg 二进制，无需系统单独安装 ffmpeg。
+# 注意：其分发的 ffmpeg 构建为 GPL 许可，详见 README「许可与第三方组件」。
+imageio-ffmpeg>=0.4.9
