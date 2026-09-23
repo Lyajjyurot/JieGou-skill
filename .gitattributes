@@ -1,0 +1,23 @@
+# 统一换行符，避免 Windows/Linux/macOS 协作时整文件 diff
+* text=auto eol=lf
+
+# 文本文件
+*.py    text eol=lf
+*.md    text eol=lf
+*.txt   text eol=lf
+*.json  text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+
+# 二进制文件（不做换行转换，也不参与 diff）
+*.jpg   binary
+*.jpeg  binary
+*.png   binary
+*.gif   binary
+*.webp  binary
+*.mp4   binary
+*.mov   binary
+*.mkv   binary
+*.wav   binary
+*.m4a   binary
+*.zip   binary
